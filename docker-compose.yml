@@ -3,7 +3,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    image: docusteal:latest
+    image: ghcr.io/faizkhay/docuseal-pro:latest
+    build:
+      context: .
     ports:
       - 3000:3000
     volumes:

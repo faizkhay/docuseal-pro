@@ -1,0 +1,88 @@
+# Production stack for DocuSeal Pro.
+#
+#   cp .env.example .env   # then fill it in — SECRET_KEY_BASE and HOST are required
+#   docker compose -f docker-compose.prod.yml up -d
+#
+# Works on any host that runs Docker with a persistent volume: a VPS, Railway,
+# Render, Fly.io, DigitalOcean. It does NOT work on shared/cPanel-style hosting.
+
+services:
+  app:
+    image: ghcr.io/faizkhay/docuseal-pro:latest
+    build:
+      context: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Bound to loopback: Caddy terminates TLS and proxies in. Drop the
+    # 127.0.0.1 prefix only if you are running your own edge proxy elsewhere.
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      # Attachments, the embedded Redis dump and the generated env file live
+      # here. This volume is the app's durable state — back it up.
+      - ./docuseal:/data/docuseal
+    environment:
+      HOST: ${HOST}
+      APP_URL: https://${HOST}
+      FORCE_SSL: "true"
+      # Pin this. If it is empty the app generates one into the data volume on
+      # first boot, and losing it invalidates every session and encrypted value.
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-docuseal}
+      RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-15}
+      SIDEKIQ_THREADS: ${SIDEKIQ_THREADS:-5}
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-0}
+      SMTP_ADDRESS: ${SMTP_ADDRESS:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_DOMAIN: ${SMTP_DOMAIN:-}
+      SMTP_AUTHENTICATION: ${SMTP_AUTHENTICATION:-plain}
+      SMTP_ENABLE_STARTTLS: ${SMTP_ENABLE_STARTTLS:-auto}
+      SIDEKIQ_BASIC_AUTH_PASSWORD: ${SIDEKIQ_BASIC_AUTH_PASSWORD:-}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/ >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+  postgres:
+    image: postgres:18
+    restart: unless-stopped
+    volumes:
+      # postgres:18 declares VOLUME /var/lib/postgresql and defaults PGDATA to
+      # /var/lib/postgresql/18/docker. Mount the parent, not .../data, or the
+      # data directory silently stays inside the container layer.
+      - pg_data:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-docuseal}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-docuseal}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    command: caddy reverse-proxy --from ${HOST} --to app:3000
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  pg_data:
+  caddy_data:
+  caddy_config:
