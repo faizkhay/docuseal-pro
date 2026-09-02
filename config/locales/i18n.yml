@@ -24,6 +24,33 @@ en: &en
   or_add_from: Or add from
   upload_a_new_document: Upload a New Document
   billing: Billing
+  about_built_on_short: Built on %{upstream_name}
+  about: About
+  about_open_source_heading: Open source
+  about_built_on_html: >-
+    This service is built on <a href="%{upstream_url}" class="underline" target="_blank"
+    rel="noopener">%{upstream_name}</a>, an open source document signing project, and
+    carries modifications of our own.
+  about_licence_heading: Licence
+  about_licence_body_html: >-
+    Released under the <a href="%{licence_url}" class="underline" target="_blank"
+    rel="noopener">GNU Affero General Public License v3.0</a>. You may use, study,
+    modify and redistribute it under that licence.
+  about_source_heading: Source code
+  about_source_available_html: >-
+    The complete corresponding source, including our modifications, is available at
+    <a href="%{source_url}" class="underline" target="_blank" rel="noopener">%{source_url}</a>.
+  about_source_on_request: >-
+    The complete corresponding source, including our modifications, is available on
+    request.
+  about_source_on_request_html: >-
+    The complete corresponding source, including our modifications, is available on
+    request. Contact <a href="mailto:%{support_email}" class="underline">%{support_email}</a>.
+  about_warranty_heading: No warranty
+  about_warranty_body: >-
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY
+    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+    PARTICULAR PURPOSE. See the licence for details.
   document_signing_tagline: Secure Document Signing
   document_signing_description: Send documents for signature and get them back signed. Build reusable PDF forms, collect legally binding e-signatures, and track every step.
   built_on_upstream_html: Built on <a href="%{upstream_url}" class="underline" target="_blank" rel="noopener">%{upstream_name}</a>

@@ -150,6 +150,7 @@
           <%= Docuseal::SUPPORT_EMAIL %>
         </a>
       <% end %>
+      <%= link_to t('about'), about_path, class: 'w-full block mt-4 underline text-center text-sm' %>
       <% if Docuseal.version.present? && !Docuseal.multitenant? && can?(:manage, EncryptedConfig) %>
         <span class="badge badge-outline text-xs block mx-auto mt-4">
           v<%= Docuseal.version %>

@@ -10,9 +10,11 @@
     <%= t('powered_by') %>
   <% end %>
   <a href="<%= Docuseal::PRODUCT_URL %><%= local_assigns[:link_path] %>" class="underline"><%= Docuseal.product_name %></a>
-  <%# Required by LICENSE_ADDITIONAL_TERMS (AGPL section 7(b)): the upstream %>
-  <%# DocuSeal attribution must stay visible in interactive user interfaces. %>
-  <div class="text-xs opacity-70 mt-1">
-    <%= t('built_on_upstream_html', upstream_url: Docuseal::UPSTREAM_URL, upstream_name: Docuseal::UPSTREAM_NAME) %>
+  <%# LICENSE_ADDITIONAL_TERMS invokes AGPL section 7(b), so the upstream %>
+  <%# attribution stays in the interface. It is kept quiet here and links to %>
+  <%# /about, which carries the full Appropriate Legal Notices that AGPL %>
+  <%# section 0 describes. Do not remove this link without legal advice. %>
+  <div class="text-[11px] leading-tight opacity-40 mt-1">
+    <%= link_to t('about_built_on_short', upstream_name: Docuseal::UPSTREAM_NAME), about_path, class: 'hover:opacity-80' %>
   </div>
 </div>

@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   resource :registration, only: %i[new create]
 
+  get 'about' => 'about#show', as: :about
+
   namespace :api, defaults: { format: :json } do
     resource :user, only: %i[show]
     resources :attachments, only: %i[create]

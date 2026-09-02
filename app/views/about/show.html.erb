@@ -1,0 +1,50 @@
+<% content_for(:html_title, "#{t('about')} | #{Docuseal.product_name}") %>
+<div class="max-w-2xl mx-auto px-4 py-10">
+  <div class="flex items-center space-x-3 mb-8">
+    <%= render 'shared/logo', width: '48', height: '48' %>
+    <div>
+      <h1 class="text-3xl font-bold"><%= Docuseal.product_name %></h1>
+      <% if Docuseal.version.present? %>
+        <div class="text-sm opacity-70">v<%= Docuseal.version %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="space-y-8">
+    <section>
+      <h2 class="text-xl font-bold mb-2"><%= t('about_open_source_heading') %></h2>
+      <p class="opacity-80">
+        <%= t('about_built_on_html', upstream_url: Docuseal::UPSTREAM_URL, upstream_name: Docuseal::UPSTREAM_NAME) %>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold mb-2"><%= t('about_licence_heading') %></h2>
+      <p class="opacity-80">
+        <%= t('about_licence_body_html', licence_url: 'https://www.gnu.org/licenses/agpl-3.0.html') %>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold mb-2"><%= t('about_source_heading') %></h2>
+      <p class="opacity-80">
+        <% if Docuseal::GITHUB_URL.present? %>
+          <%= t('about_source_available_html', source_url: Docuseal::GITHUB_URL) %>
+        <% elsif Docuseal::SUPPORT_EMAIL.present? %>
+          <%= t('about_source_on_request_html', support_email: Docuseal::SUPPORT_EMAIL) %>
+        <% else %>
+          <%= t('about_source_on_request') %>
+        <% end %>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold mb-2"><%= t('about_warranty_heading') %></h2>
+      <p class="opacity-80 text-sm"><%= t('about_warranty_body') %></p>
+    </section>
+  </div>
+
+  <div class="mt-10 pt-6 border-t border-base-300 text-center">
+    <%= link_to t('back'), root_path, class: 'white-button' %>
+  </div>
+</div>

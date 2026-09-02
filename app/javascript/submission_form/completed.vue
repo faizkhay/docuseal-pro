@@ -91,17 +91,15 @@
     >
       {{ t('powered_by') }}
       <span class="font-medium">{{ productName }}</span>
-      <!-- Required by LICENSE_ADDITIONAL_TERMS (AGPL section 7(b)): the
-           upstream DocuSeal attribution stays visible in interactive UIs.
+      <!-- LICENSE_ADDITIONAL_TERMS invokes AGPL section 7(b), so the upstream
+           attribution stays in the interface. Kept quiet here and linked to
+           /about, which carries the full Appropriate Legal Notices.
            Mirrors app/views/shared/_powered_by.html.erb. -->
-      <div class="text-xs opacity-70 mt-1">
-        Built on
+      <div class="text-[11px] leading-tight opacity-40 mt-1">
         <a
-          href="https://www.docuseal.com"
-          target="_blank"
-          rel="noopener"
-          class="underline"
-        >DocuSeal</a>
+          :href="baseUrl + '/about'"
+          class="hover:opacity-80"
+        >Built on DocuSeal</a>
       </div>
     </div>
   </div>
