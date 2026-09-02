@@ -34,6 +34,11 @@
           <%= link_to t('notifications'), settings_notifications_path, class: 'text-base hover:bg-base-300' %>
         </li>
       <% end %>
+      <% if Billing.enabled? && can?(:manage, :billing) %>
+        <li>
+          <%= link_to t('billing'), settings_billing_index_path, class: 'text-base hover:bg-base-300' %>
+        </li>
+      <% end %>
       <% if can?(:read, EncryptedConfig.new(key: EncryptedConfig::ESIGN_CERTS_KEY, account: current_account)) %>
         <li>
           <%= link_to t('e_signature'), settings_esign_path, class: 'text-base hover:bg-base-300' %>

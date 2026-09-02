@@ -34,5 +34,8 @@ class Ability
     can :manage, :delegate_form
     can :manage, :reply_to
     can :manage, :tenants
+
+    # Money is admin-only, unlike the feature flags above.
+    can :manage, :billing if user.role == User::ADMIN_ROLE
   end
 end

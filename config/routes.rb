@@ -188,6 +188,12 @@ Rails.application.routes.draw do
     resources :email, only: %i[index create], controller: 'email_smtp_settings'
     resources :sso, only: %i[index create], controller: 'sso_settings'
     resources :notifications, only: %i[index create], controller: 'notifications_settings'
+    resources :billing, only: %i[index create], controller: 'billing_settings' do
+      collection do
+        get :confirm
+        delete :cancel
+      end
+    end
     resource :esign, only: %i[show create new update destroy], controller: 'esign_settings'
     resources :users, only: %i[index]
     resources :archived_users, only: %i[index], path: 'users/:status', controller: 'users',
