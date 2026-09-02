@@ -90,11 +90,19 @@
       class="text-center mt-4"
     >
       {{ t('powered_by') }}
-      <a
-        href="https://www.docuseal.com/start"
-        target="_blank"
-        class="underline"
-      >DocuSeal</a> - {{ t('open_source_documents_software') }}
+      <span class="font-medium">{{ productName }}</span>
+      <!-- Required by LICENSE_ADDITIONAL_TERMS (AGPL section 7(b)): the
+           upstream DocuSeal attribution stays visible in interactive UIs.
+           Mirrors app/views/shared/_powered_by.html.erb. -->
+      <div class="text-xs opacity-70 mt-1">
+        Built on
+        <a
+          href="https://www.docuseal.com"
+          target="_blank"
+          rel="noopener"
+          class="underline"
+        >DocuSeal</a>
+      </div>
     </div>
   </div>
 </template>
@@ -130,6 +138,13 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    // Mirrors Docuseal::PRODUCT_NAME. Passed in where the mount point supplies
+    // it; the default keeps this view branded if it is not.
+    productName: {
+      type: String,
+      required: false,
+      default: 'SignFlow'
     },
     hasSignatureFields: {
       type: Boolean,
