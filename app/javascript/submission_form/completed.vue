@@ -144,7 +144,7 @@ export default {
     productName: {
       type: String,
       required: false,
-      default: 'SignFlow'
+      default: 'SignDocuMate'
     },
     hasSignatureFields: {
       type: Boolean,

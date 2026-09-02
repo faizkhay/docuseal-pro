@@ -12,7 +12,7 @@ module Docuseal
 
   DEFAULT_APP_URL = ENV.fetch('APP_URL', 'http://localhost:3000')
 
-  PRODUCT_NAME = ENV.fetch('PRODUCT_NAME', 'SignFlow')
+  PRODUCT_NAME = ENV.fetch('PRODUCT_NAME', 'SignDocuMate')
   PRODUCT_URL = ENV.fetch('PRODUCT_URL', DEFAULT_APP_URL)
   PRODUCT_EMAIL_URL = ENV.fetch('PRODUCT_EMAIL_URL', PRODUCT_URL)
 

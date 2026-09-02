@@ -108,7 +108,7 @@ Beyond the basics in `.env.example`, a public SaaS needs these set explicitly:
 | `SMTP_*` | Without these the app cannot send a single signing invitation. |
 | `SIGNUP_ENABLED` | `true` to open self-serve registration. |
 | `BILLING_ENABLED` | Leave unset until a real payment provider replaces the mock. |
-| `PRODUCT_NAME` | Defaults to SignFlow; set it if you rename again. |
+| `PRODUCT_NAME` | Defaults to SignDocuMate; set it if you rename again. |
 
 ## Railway
 

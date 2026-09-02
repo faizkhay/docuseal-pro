@@ -1,13 +1,13 @@
 <h1 align="center" style="border-bottom: none">
   <div>
-    SignFlow
+    SignDocuMate
   </div>
 </h1>
 <h3 align="center">
   Secure document signing, self-hosted or run as a service
 </h3>
 
-> SignFlow is built on [DocuSeal](https://github.com/docusealco/docuseal) and is
+> SignDocuMate is built on [DocuSeal](https://github.com/docusealco/docuseal) and is
 > distributed under the same AGPL-3.0 licence. All features that upstream
 > restricts to Pro/Console subscribers are enabled here, with no external
 > licence required, plus self-serve sign-up and subscription billing.
@@ -23,7 +23,7 @@
 
 ## Differences from the official project
 
-| Feature | DocuSeal official | SignFlow |
+| Feature | DocuSeal official | SignDocuMate |
 |---|:---:|:---:|
 | Signature & PDF forms | ✅ | ✅ |
 | API & Webhooks | ✅ | ✅ |
