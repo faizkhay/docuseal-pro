@@ -29,9 +29,13 @@ en: &en
   billing_current_plan: Current plan
   billing_per_month: month
   billing_renews_on: Renews on %{date}
-  billing_documents_per_month: "%{count} documents per month"
+  billing_documents_per_month:
+    one: "%{count} document per month"
+    other: "%{count} documents per month"
   billing_unlimited_documents: Unlimited documents
-  billing_users_included: "%{count} users"
+  billing_users_included:
+    one: "%{count} user"
+    other: "%{count} users"
   billing_unlimited_users: Unlimited users
   billing_choose_plan: Choose plan
   billing_cancel_plan: Cancel plan
