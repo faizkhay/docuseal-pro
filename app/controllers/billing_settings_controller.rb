@@ -16,15 +16,17 @@ class BillingSettingsController < ApplicationController
   def create
     plan_id = params[:plan_id].to_s
 
-    unless Billing.plan?(plan_id)
-      return redirect_to settings_billing_index_path, alert: I18n.t('billing_unknown_plan')
-    end
+    return redirect_to settings_billing_index_path, alert: I18n.t('billing_unknown_plan') unless Billing.plan?(plan_id)
 
+    # Built from the current request rather than the configured APP_URL. If the
+    # two disagree at all — localhost vs 127.0.0.1, a different port — the
+    # return trip crosses origin, the session cookie does not travel with it,
+    # and checkout fails in a way that looks like a billing bug.
     checkout_url = Billing.provider.create_checkout_session(
       account: current_account,
       plan_id:,
-      success_url: confirm_settings_billing_index_url,
-      cancel_url: settings_billing_index_url
+      success_url: "#{request.base_url}#{confirm_settings_billing_index_path}",
+      cancel_url: "#{request.base_url}#{settings_billing_index_path}"
     )
 
     redirect_to checkout_url, allow_other_host: true
@@ -37,9 +39,7 @@ class BillingSettingsController < ApplicationController
   def confirm
     payload = Billing.provider.verify_checkout_token(params[:token], account: current_account)
 
-    if payload.blank?
-      return redirect_to settings_billing_index_path, alert: I18n.t('billing_checkout_failed')
-    end
+    return redirect_to settings_billing_index_path, alert: I18n.t('billing_checkout_failed') if payload.blank?
 
     Billing::Subscription.assign!(
       account: current_account,

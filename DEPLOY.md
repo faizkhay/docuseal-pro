@@ -94,6 +94,22 @@ Co-locating Postgres on the same box is usually both faster and cheaper.
 `/var/lib/postgresql/data` (the pre-18 convention) leaves the data directory
 inside the container layer, where it is lost on recreate.
 
+## Required environment for a SaaS deploy
+
+Beyond the basics in `.env.example`, a public SaaS needs these set explicitly:
+
+| Variable | Why it matters |
+|---|---|
+| `SECRET_KEY_BASE` | Generate once with `openssl rand -hex 64` and never rotate. It also derives the Redis password and the encryption secret for 2FA and encrypted columns. |
+| `APP_URL` | Must match the host users actually browse, scheme included. A mismatch breaks checkout redirects and signing links in ways that look like application bugs. |
+| `HOST` | Same host, without the scheme. |
+| `FORCE_SSL` | `true`. |
+| `DATABASE_URL` | Postgres. Session-mode pooler or direct connection only. |
+| `SMTP_*` | Without these the app cannot send a single signing invitation. |
+| `SIGNUP_ENABLED` | `true` to open self-serve registration. |
+| `BILLING_ENABLED` | Leave unset until a real payment provider replaces the mock. |
+| `PRODUCT_NAME` | Defaults to SignFlow; set it if you rename again. |
+
 ## Railway
 
 Railway builds this repo's `Dockerfile` directly. `railway.json` pins the
