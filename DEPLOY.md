@@ -93,3 +93,57 @@ Co-locating Postgres on the same box is usually both faster and cheaper.
 `PGDATA` to `/var/lib/postgresql/18/docker`. Mounting at
 `/var/lib/postgresql/data` (the pre-18 convention) leaves the data directory
 inside the container layer, where it is lost on recreate.
+
+## Railway
+
+Railway builds this repo's `Dockerfile` directly. `railway.json` pins the
+builder, the `/up` health check, and — importantly — **one replica**.
+
+### Why `numReplicas` must stay at 1
+
+Each container runs its own embedded Redis and its own Sidekiq. A second
+replica would get a *separate* Redis, so jobs enqueued on replica A would never
+be seen by replica B, and both would run migrations on boot. To scale past one
+container you must first externalise Redis: set `REDIS_URL` to a Railway Redis
+service (which makes the app skip starting its own), then split the web and
+worker into separate services.
+
+### Setup
+
+1. **New Project → Deploy from GitHub repo**, pick this repository.
+2. **Add a Postgres service** (New → Database → PostgreSQL). Railway exposes it
+   as `DATABASE_URL` on the Postgres service.
+3. **Attach a volume to the app service**, mount path `/data/docuseal`. Without
+   this, attachments and the generated env file vanish on every deploy.
+4. **Set variables** on the app service:
+
+   | Variable | Value |
+   |---|---|
+   | `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` (Railway reference syntax) |
+   | `SECRET_KEY_BASE` | `openssl rand -hex 64` — generate once, never change |
+   | `HOST` | your custom domain, e.g. `sign.example.com` |
+   | `APP_URL` | `https://sign.example.com` |
+   | `FORCE_SSL` | `true` |
+   | `WORKDIR` | `/data/docuseal` |
+   | `SMTP_*` | see `.env.example` |
+
+   Leave `PORT` alone — Railway injects it and `config/puma.rb` reads it.
+5. **Add your custom domain** under Settings → Networking, then point a CNAME
+   at the Railway target.
+
+### Cost
+
+Railway bills actual per-second usage, not allocation: roughly **$10 per GB of
+RAM** and **$20 per vCPU** per month, plus $0.15/GB for volumes and $0.05/GB
+egress. This app idles around 1.2–1.5 GB with low CPU, so expect **≈$20–25/mo**
+for app + Postgres + volume, less the $5 Hobby credit.
+
+A comparable VPS is cheaper in raw cost; Railway's premium buys you no server
+administration, automatic TLS, and deploy-on-push.
+
+### Build note
+
+The `Dockerfile` downloads fonts and pdfium, compiles native gems, and runs a
+full webpack build. First deploy takes a while. If Railway's build times out,
+build in GitHub Actions instead (the workflow publishes to
+`ghcr.io/faizkhay/docuseal-pro`) and point Railway at that image.
