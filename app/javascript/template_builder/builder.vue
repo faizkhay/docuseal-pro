@@ -43,7 +43,7 @@
             {{ t('remove') }}
           </button>
           <button
-            class="btn btn-sm btn-neutral text-white"
+            class="btn btn-sm btn-primary text-white"
             @click.prevent="save"
           >
             {{ t('keep') }}

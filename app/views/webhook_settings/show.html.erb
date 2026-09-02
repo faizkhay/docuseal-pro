@@ -132,7 +132,7 @@
                 <%= t('submission_example_payload') %>
               </span>
               <% if @webhook_url.url.present? && @webhook_url.events.include?('form.completed') %>
-                <%= button_to button_title(title: 'Test Webhook', disabled_with: t('sending'), icon_disabled: svg_icon('loader', class: 'w-4 h-4 animate-spin')), settings_webhook_resend_path(@webhook_url), class: 'btn btn-neutral btn-outline btn-sm', method: :post %>
+                <%= button_to button_title(title: 'Test Webhook', disabled_with: t('sending'), icon_disabled: svg_icon('loader', class: 'w-4 h-4 animate-spin')), settings_webhook_resend_path(@webhook_url), class: 'btn btn-primary btn-outline btn-sm', method: :post %>
               <% end %>
             </div>
           </div>

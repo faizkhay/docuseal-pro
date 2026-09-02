@@ -1,24 +1,29 @@
 <h1 align="center" style="border-bottom: none">
   <div>
-    <a href="https://www.docuseal.com">
-      <img alt="DocuSeal" src="https://github.com/user-attachments/assets/38b45682-ffa4-4919-abde-d2d422325c44" width="80" />
-      <br>
-    </a>
-    DocuSeal — Unlocked Edition
+    SignFlow
   </div>
 </h1>
 <h3 align="center">
-  DocuSeal fork with all Pro features unlocked for self-hosting
+  Secure document signing, self-hosted or run as a service
 </h3>
 
-> **This is an unofficial fork of [docusealco/docuseal](https://github.com/docusealco/docuseal).**
-> All features normally restricted to Pro/Console subscribers are enabled directly in the self-hosted instance, with no external license required.
+> SignFlow is built on [DocuSeal](https://github.com/docusealco/docuseal) and is
+> distributed under the same AGPL-3.0 licence. All features that upstream
+> restricts to Pro/Console subscribers are enabled here, with no external
+> licence required, plus self-serve sign-up and subscription billing.
+
+> **Licence note.** AGPL-3.0 section 13 requires that anyone who uses this over
+> a network be offered the complete corresponding source, including your
+> modifications. `LICENSE_ADDITIONAL_TERMS` (section 7(b)) additionally requires
+> that the DocuSeal attribution stay visible in interactive user interfaces —
+> it is rendered beneath the product name on signing pages and must not be
+> removed. Take your own legal advice before selling access.
 
 ---
 
 ## Differences from the official project
 
-| Feature | DocuSeal official | This fork |
+| Feature | DocuSeal official | SignFlow |
 |---|:---:|:---:|
 | Signature & PDF forms | ✅ | ✅ |
 | API & Webhooks | ✅ | ✅ |

@@ -91,7 +91,7 @@
         >
           <a
             href="#"
-            class="btn btn-sm btn-neutral font-medium hidden md:flex"
+            class="btn btn-sm btn-primary font-medium hidden md:flex"
             :class="{ 'btn-outline': !isShowQr, 'text-white': isShowQr }"
             @click.prevent="isShowQr ? hideQr() : [isTextSignature = false, showQr()]"
           >

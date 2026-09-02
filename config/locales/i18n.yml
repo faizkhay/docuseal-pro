@@ -24,6 +24,9 @@ en: &en
   or_add_from: Or add from
   upload_a_new_document: Upload a New Document
   billing: Billing
+  document_signing_tagline: Secure Document Signing
+  document_signing_description: Send documents for signature and get them back signed. Build reusable PDF forms, collect legally binding e-signatures, and track every step.
+  built_on_upstream_html: Built on <a href="%{upstream_url}" class="underline" target="_blank" rel="noopener">%{upstream_name}</a>
   billing_free: Free
   billing_plans: Plans
   billing_current_plan: Current plan

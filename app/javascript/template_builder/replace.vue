@@ -1,7 +1,7 @@
 <template>
   <label
     :for="inputId"
-    class="btn btn-neutral btn-xs text-white transition-none replace-document-button"
+    class="btn btn-primary btn-xs text-white transition-none replace-document-button"
     :class="{ 'opacity-100': isLoading }"
   >
     {{ message }}

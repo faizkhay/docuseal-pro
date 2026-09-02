@@ -9,5 +9,10 @@
   <% else %>
     <%= t('powered_by') %>
   <% end %>
-  <a href="<%= Docuseal::PRODUCT_URL %><%= local_assigns[:link_path] %>" class="underline"><%= Docuseal.product_name %></a> - <%= t('open_source_documents_software') %>
+  <a href="<%= Docuseal::PRODUCT_URL %><%= local_assigns[:link_path] %>" class="underline"><%= Docuseal.product_name %></a>
+  <%# Required by LICENSE_ADDITIONAL_TERMS (AGPL section 7(b)): the upstream %>
+  <%# DocuSeal attribution must stay visible in interactive user interfaces. %>
+  <div class="text-xs opacity-70 mt-1">
+    <%= t('built_on_upstream_html', upstream_url: Docuseal::UPSTREAM_URL, upstream_name: Docuseal::UPSTREAM_NAME) %>
+  </div>
 </div>

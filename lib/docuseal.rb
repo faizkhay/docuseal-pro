@@ -2,18 +2,32 @@
 
 module Docuseal
   URL_CACHE = ActiveSupport::Cache::MemoryStore.new
-  PRODUCT_URL = 'https://www.docuseal.com'
-  PRODUCT_EMAIL_URL = ENV.fetch('PRODUCT_EMAIL_URL', PRODUCT_URL)
-  NEWSLETTER_URL = "#{PRODUCT_URL}/newsletters".freeze
-  ENQUIRIES_URL = "#{PRODUCT_URL}/enquiries".freeze
-  PRODUCT_NAME = 'DocuSeal'
+
+  # Upstream project. The AGPL additional terms (LICENSE_ADDITIONAL_TERMS,
+  # invoking section 7(b)) require this attribution to stay visible in
+  # interactive user interfaces, so it is held separately from the product
+  # brand rather than renamed along with it.
+  UPSTREAM_NAME = 'DocuSeal'
+  UPSTREAM_URL = 'https://www.docuseal.com'
+
   DEFAULT_APP_URL = ENV.fetch('APP_URL', 'http://localhost:3000')
-  GITHUB_URL = 'https://github.com/docusealco/docuseal'
-  DISCORD_URL = 'https://discord.gg/qygYCDGck9'
-  TWITTER_URL = 'https://twitter.com/docusealco'
-  TWITTER_HANDLE = '@docusealco'
-  CHATGPT_URL = "#{PRODUCT_URL}/chat".freeze
-  SUPPORT_EMAIL = 'support@docuseal.com'
+
+  PRODUCT_NAME = ENV.fetch('PRODUCT_NAME', 'SignFlow')
+  PRODUCT_URL = ENV.fetch('PRODUCT_URL', DEFAULT_APP_URL)
+  PRODUCT_EMAIL_URL = ENV.fetch('PRODUCT_EMAIL_URL', PRODUCT_URL)
+
+  # Community links and outbound endpoints, unset unless configured. They
+  # previously pointed at the upstream project, which under a different brand
+  # sends this product's users to someone else's community and their email
+  # addresses to someone else's servers.
+  GITHUB_URL = ENV.fetch('GITHUB_URL', nil)
+  DISCORD_URL = ENV.fetch('DISCORD_URL', nil)
+  TWITTER_URL = ENV.fetch('TWITTER_URL', nil)
+  TWITTER_HANDLE = ENV.fetch('TWITTER_HANDLE', nil)
+  NEWSLETTER_URL = ENV.fetch('NEWSLETTER_URL', nil)
+  ENQUIRIES_URL = ENV.fetch('ENQUIRIES_URL', nil)
+  CHATGPT_URL = ENV.fetch('CHATGPT_URL', nil)
+  SUPPORT_EMAIL = ENV.fetch('SUPPORT_EMAIL', nil)
   HOST = ENV.fetch('HOST', 'localhost')
   AATL_CERT_NAME = 'docuseal_aatl'
   CONSOLE_URL = if Rails.env.development?

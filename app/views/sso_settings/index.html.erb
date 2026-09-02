@@ -33,7 +33,7 @@
           <%= ff.label :sp_entity_id, 'Service Provider Entity ID (optional)', class: 'label' %>
           <%= ff.text_field :sp_entity_id, value: value['sp_entity_id'].presence || request.base_url, class: 'base-input' %>
           <label class="label">
-            <span class="label-text-alt">The entity ID for this DocuSeal instance. Use your app URL if unsure.</span>
+            <span class="label-text-alt">The entity ID for this <%= Docuseal.product_name %> instance. Use your app URL if unsure.</span>
           </label>
         </div>
 

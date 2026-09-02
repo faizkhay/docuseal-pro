@@ -57,7 +57,9 @@
             <div class="flex-none">
               <% if current %>
                 <% if plan_id != Billing::DEFAULT_PLAN_ID %>
-                  <%= button_to t('billing_cancel_plan'), cancel_settings_billing_index_path, method: :delete, class: 'base-button btn-outline', form: { data: { turbo_confirm: t('are_you_sure_') } } %>
+                  <%# white-button, not base-button + btn-outline: with a blue %>
+                  <%# primary those two resolve to blue text on a blue fill. %>
+                  <%= button_to t('billing_cancel_plan'), cancel_settings_billing_index_path, method: :delete, class: 'white-button', form: { data: { turbo_confirm: t('are_you_sure_') } } %>
                 <% end %>
               <% else %>
                 <%= button_to t('billing_choose_plan'), settings_billing_index_path, method: :post, params: { plan_id: plan_id }, class: 'base-button' %>

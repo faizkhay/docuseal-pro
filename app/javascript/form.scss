@@ -56,7 +56,7 @@ button[disabled] .enabled, button.btn-disabled .enabled {
 }
 
 .base-button {
-  @apply btn btn-neutral text-white text-base;
+  @apply btn btn-primary text-white text-base;
 }
 
 .white-button {

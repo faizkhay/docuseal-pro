@@ -58,7 +58,7 @@
           </div>
           <div class="form-control">
             <%= ff.label :vonage_from, 'From (Name or Number)', class: 'label' %>
-            <%= ff.text_field :vonage_from, value: value['vonage_from'], class: 'base-input', placeholder: 'DocuSeal' %>
+            <%= ff.text_field :vonage_from, value: value['vonage_from'], class: 'base-input', placeholder: Docuseal.product_name %>
           </div>
         </div>
 
@@ -72,7 +72,7 @@
           </div>
           <div class="form-control">
             <%= ff.label :brevo_sender, 'Sender Name or Number', class: 'label' %>
-            <%= ff.text_field :brevo_sender, value: value['brevo_sender'], class: 'base-input', placeholder: 'DocuSeal' %>
+            <%= ff.text_field :brevo_sender, value: value['brevo_sender'], class: 'base-input', placeholder: Docuseal.product_name %>
           </div>
         </div>
 

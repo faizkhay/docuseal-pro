@@ -11,7 +11,7 @@
   <% if signed_in? %>
     <div class="space-x-4 flex items-center">
       <% if Docuseal.demo? %>
-        <a href="https://docuseal.com/sign_up" class="btn btn-neutral btn-sm btn-outline inline-flex items-center justify-center" style="height: 37px">
+        <a href="<%= Docuseal::PRODUCT_URL %>" class="btn btn-primary btn-sm btn-outline inline-flex items-center justify-center" style="height: 37px">
           <%= t('sign_up') %>
         </a>
         <span class="hidden sm:inline">
@@ -51,8 +51,8 @@
             </li>
           <% end %>
           <% if Docuseal.multitenant? || current_user.role == 'superadmin' %>
-            <li>
-              <%= link_to Docuseal::CHATGPT_URL, target: 'blank', class: 'flex items-center' do %>
+            <li <%= 'hidden' if Docuseal::CHATGPT_URL.blank? %>>
+              <%= link_to Docuseal::CHATGPT_URL.to_s, target: 'blank', class: 'flex items-center' do %>
                 <%= svg_icon('sparkles', class: 'w-5 h-5 flex-shrink-0 stroke-2') %>
                 <span class="mr-1 whitespace-nowrap"><%= t('ask_ai') %></span>
               <% end %>
@@ -90,7 +90,7 @@
         <% end %>
       <% end %>
       <% if Docuseal.multitenant? && !request.path.in?([registration_path, new_registration_path]) %>
-        <%= link_to registration_path({ lang: params[:lang] }.compact_blank), class: 'btn btn-neutral btn-sm btn-outline' do %>
+        <%= link_to registration_path({ lang: params[:lang] }.compact_blank), class: 'btn btn-primary btn-sm btn-outline' do %>
           <span class="flex items-center justify-center space-x-1">
             <span class="hidden sm:block capitalize"><%= t('create_free_account') %></span>
             <span class="md:hidden"><%= t('sign_up') %></span>

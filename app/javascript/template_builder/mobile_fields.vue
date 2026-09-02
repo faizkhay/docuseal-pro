@@ -1,7 +1,7 @@
 <template>
   <span class="dropdown dropdown-top dropdown-end absolute bottom-4 right-4 z-10 fields-dropdown-mobile">
     <label
-      class="btn btn-neutral text-white btn-circle btn-lg group"
+      class="btn btn-primary text-white btn-circle btn-lg group"
       tabindex="0"
     >
       <IconPlus

@@ -286,7 +286,7 @@
             <span>
               <%= t('efficient_search_with_search_index') %>
             </span>
-            <%= button_to params[:reindex] == 'true' ? t('reindex') : t('build_search_index'), settings_search_entries_reindex_index_path, method: :post, class: 'btn btn-sm btn-neutral text-white px-4' %>
+            <%= button_to params[:reindex] == 'true' ? t('reindex') : t('build_search_index'), settings_search_entries_reindex_index_path, method: :post, class: 'btn btn-sm btn-primary text-white px-4' %>
           </div>
         <% end %>
       </div>

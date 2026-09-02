@@ -37,7 +37,7 @@
       :data-tip="t('fill_all_required_fields_to_complete')"
     >
       <button
-        class="btn btn-sm btn-neutral text-white px-4 w-full flex justify-center btn-disabled pointer-events-auto"
+        class="btn btn-sm btn-primary text-white px-4 w-full flex justify-center btn-disabled pointer-events-auto"
         @click="[isFormVisible = true, !isCompleted && goToStep(stepFields.indexOf(emptyValueRequiredStep), true, false)]"
       >
         {{ t('complete') }}
@@ -46,7 +46,7 @@
     <button
       v-else
       id="complete_form_button"
-      class="btn btn-sm btn-neutral text-white px-4 w-full flex justify-center"
+      class="btn btn-sm btn-primary text-white px-4 w-full flex justify-center"
       form="steps_form"
       type="submit"
       name="completed"
@@ -67,7 +67,7 @@
   <button
     v-if="!isFormVisible"
     id="expand_form_button"
-    class="btn btn-neutral flex text-white absolute bottom-0 w-full mb-3 expand-form-button text-base"
+    class="btn btn-primary flex text-white absolute bottom-0 w-full mb-3 expand-form-button text-base"
     style="width: 96%; margin-left: 2%"
     @click.prevent="[isFormVisible = true, $nextTick(() => scrollIntoField(currentField))]"
   >

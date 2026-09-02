@@ -6,7 +6,13 @@ class NewslettersController < ApplicationController
   def show; end
 
   def update
-    Faraday.post(Docuseal::NEWSLETTER_URL, newsletter_params.to_json, 'Content-Type' => 'application/json')
+    # No-op unless an endpoint is configured. This used to post the address to
+    # the upstream project's servers, which is not where this product's users
+    # expect their email to go. The redirect is left to the ensure block below,
+    # which already runs on every path.
+    if Docuseal::NEWSLETTER_URL.present?
+      Faraday.post(Docuseal::NEWSLETTER_URL, newsletter_params.to_json, 'Content-Type' => 'application/json')
+    end
   rescue StandardError => e
     Rails.logger.error(e)
   ensure
