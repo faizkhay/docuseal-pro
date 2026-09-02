@@ -14,3 +14,8 @@
     <span>Sign in with SSO</span>
   <% end %>
 <% end %>
+<% if Docuseal.signup_enabled? %>
+  <div class="text-center mt-4">
+    <%= link_to t('dont_have_an_account'), new_registration_path, class: 'link' %>
+  </div>
+<% end %>

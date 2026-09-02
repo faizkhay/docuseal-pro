@@ -69,6 +69,12 @@ module Docuseal
     ENV['DEMO'] == 'true'
   end
 
+  # Public self-serve registration. Off unless explicitly enabled, so that a
+  # private instance is never left accepting sign-ups by accident.
+  def signup_enabled?
+    ENV['SIGNUP_ENABLED'] == 'true'
+  end
+
   def active_storage_public?
     ENV['ACTIVE_STORAGE_PUBLIC'] == 'true'
   end

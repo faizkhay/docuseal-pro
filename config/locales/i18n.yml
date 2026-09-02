@@ -185,6 +185,10 @@ en: &en
   last_name: Last name
   sign_up: Sign up
   signing_up: Signing up
+  create_your_account: Create your account
+  dont_have_an_account: Don't have an account?
+  your_account_has_been_created: Your account has been created.
+  too_many_requests: Too many requests.
   profile_details: Profile Details
   sign_up_with_google: Sign up with Google
   sign_up_with_microsoft: Sign up with Microsoft

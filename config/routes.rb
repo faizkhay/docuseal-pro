@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :registration, only: %i[new create]
+
   namespace :api, defaults: { format: :json } do
     resource :user, only: %i[show]
     resources :attachments, only: %i[create]
