@@ -91,16 +91,17 @@
     >
       {{ t('powered_by') }}
       <span class="font-medium">{{ productName }}</span>
-      <!-- LICENSE_ADDITIONAL_TERMS invokes AGPL section 7(b), so the upstream
-           attribution stays in the interface. Kept quiet here and linked to
-           /about, which carries the full Appropriate Legal Notices.
-           Mirrors app/views/shared/_powered_by.html.erb. -->
-      <div class="text-[11px] leading-tight opacity-40 mt-1">
-        <a
-          :href="baseUrl + '/about'"
-          class="hover:opacity-80"
-        >Built on DocuSeal</a>
-      </div>
+      <!-- AGPL-3.0 section 0 asks for a "convenient and prominently visible"
+           feature carrying the Appropriate Legal Notices. This link is it:
+           /about holds the upstream attribution, the licence and the section 13
+           source offer. Keep it reachable and unhidden — do not remove it, and
+           do not suppress it with display:none, zero opacity or off-screen
+           positioning. Mirrors app/views/shared/_powered_by.html.erb. -->
+      <span class="opacity-60">·</span>
+      <a
+        :href="baseUrl + '/about'"
+        class="underline opacity-60 hover:opacity-100"
+      >{{ t('about') }}</a>
     </div>
   </div>
 </template>

@@ -10,11 +10,12 @@
     <%= t('powered_by') %>
   <% end %>
   <a href="<%= Docuseal::PRODUCT_URL %><%= local_assigns[:link_path] %>" class="underline"><%= Docuseal.product_name %></a>
-  <%# LICENSE_ADDITIONAL_TERMS invokes AGPL section 7(b), so the upstream %>
-  <%# attribution stays in the interface. It is kept quiet here and links to %>
-  <%# /about, which carries the full Appropriate Legal Notices that AGPL %>
-  <%# section 0 describes. Do not remove this link without legal advice. %>
-  <div class="text-[11px] leading-tight opacity-40 mt-1">
-    <%= link_to t('about_built_on_short', upstream_name: Docuseal::UPSTREAM_NAME), about_path, class: 'hover:opacity-80' %>
-  </div>
+  <%# AGPL-3.0 section 0 asks for a "convenient and prominently visible" %>
+  <%# feature carrying the Appropriate Legal Notices. This link is it: /about %>
+  <%# holds the upstream attribution, the licence, and the section 13 source %>
+  <%# offer. The link must stay reachable and unhidden — do not remove it, and %>
+  <%# do not suppress it with display:none, zero opacity or off-screen %>
+  <%# positioning, which would defeat the requirement it exists to satisfy. %>
+  <span class="opacity-60">·</span>
+  <%= link_to t('about'), about_path, class: 'underline opacity-60 hover:opacity-100' %>
 </div>
